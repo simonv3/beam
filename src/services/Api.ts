@@ -218,6 +218,23 @@ export const deleteUserTrackGroup = async (id: string) => {
   });
 };
 
+export const uploadTrackGroupCover = async (file: File) => {
+  var data = new FormData();
+  const { token } = getToken();
+  data.append("file", file);
+  return fetch("https://dash.resonate.coop/api/user/upload", {
+    method: "POST",
+    body: data,
+    headers: {
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+  });
+};
+
+/**
+ * Misc user info
+ */
+
 export const fetchUserStats = async (
   from: string,
   to: string
